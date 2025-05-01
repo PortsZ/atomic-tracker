@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useHabitStore } from "@/lib/store";
+import { useHabitStore } from "@/stores/store";
 
 import { HabitContainer } from "@/components/HabitContainer";
 import { HabitTabs } from "@/components/HabitTabs";

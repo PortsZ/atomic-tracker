@@ -72,7 +72,7 @@ npm run dev
 
 ## Useful Links:
 
-- Excalidraw: https://link.excalidraw.com/l/9xENFG3oEy/vzn0rZCBMt
-- Thought process in GPT:
+- [Excalidraw](https://link.excalidraw.com/l/9xENFG3oEy/vzn0rZCBMt)
+- [Thought process in GPT](https://chatgpt.com/share/681397b9-8598-8005-9657-13a6196c3cb7)
+- [Deployment](https://atomic-tracker-beta.vercel.app/)
 - Video:
-- This code:

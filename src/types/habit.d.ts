@@ -12,4 +12,6 @@ export interface HabitStats {
   currentStreak: number;
   longestStreak: number;
   completionPercentage: number;
+  monthlyScore: number;
+  consistencyRating: number;
 }

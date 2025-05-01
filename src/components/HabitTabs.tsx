@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Habit } from "@/types/habit";
-import { useHabitStore } from "@/lib/store";
+import { useHabitStore } from "@/stores/store";
 import {
   Dialog,
   DialogContent,

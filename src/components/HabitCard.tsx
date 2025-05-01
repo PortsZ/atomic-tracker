@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useHabitStats } from "@/lib/useHabitStats";
 import { getMotivationalMessage } from "@/lib/motivationalMessages";
 import { Habit } from "@/types/habit";
-import { useHabitStore } from "@/lib/store";
+import { useHabitStore } from "@/stores/store";
 import {
   Dialog,
   DialogContent,
@@ -23,8 +23,13 @@ interface HabitCardProps {
 export function HabitCard({ habit }: HabitCardProps) {
   const [showUnlockDialog, setShowUnlockDialog] = useState(false);
   const [unlockInput, setUnlockInput] = useState("");
-  const { currentStreak, longestStreak, completionPercentage } =
-    useHabitStats(habit);
+  const {
+    currentStreak,
+    longestStreak,
+    completionPercentage,
+    consistencyRating,
+    monthlyScore,
+  } = useHabitStats(habit);
   const motivationalMessage = getMotivationalMessage(completionPercentage);
   const { toggleLockPastEntries } = useHabitStore();
 
@@ -65,13 +70,34 @@ export function HabitCard({ habit }: HabitCardProps) {
         <CardContent>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <TrackablesCard className="bg-muted p-3 rounded-md">
+              <TrackablesCard>
+                <p className="text-sm text-muted-foreground">
+                  Monthly Scoreboard
+                </p>
+                <p className="text-2xl font-bold">
+                  {monthlyScore} {monthlyScore === 1 ? "day " : "days "}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  marked as done this month
+                </p>
+              </TrackablesCard>
+              <TrackablesCard>
+                <p className="text-sm text-muted-foreground">
+                  Consistency Rating
+                </p>
+                <p className="text-2xl font-bold">{consistencyRating}%</p>
+                <p className="text-sm text-muted-foreground">
+                  you have been consistent for {consistencyRating}% of the
+                  project
+                </p>
+              </TrackablesCard>
+              <TrackablesCard>
                 <p className="text-sm text-muted-foreground">Current Streak</p>
                 <p className="text-2xl font-bold">
                   {currentStreak} {currentStreak === 1 ? "day" : "days"}
                 </p>
               </TrackablesCard>
-              <TrackablesCard className="bg-muted p-3 rounded-md">
+              <TrackablesCard>
                 <p className="text-sm text-muted-foreground">Longest Streak</p>
                 <p className="text-2xl font-bold">
                   {longestStreak} {longestStreak === 1 ? "day" : "days"}

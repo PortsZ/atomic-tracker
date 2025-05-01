@@ -3,7 +3,7 @@ import { Habit, HabitStats } from "@/types/habit";
 
 export function useHabitStats(habit: Habit): HabitStats {
   return useMemo(() => {
-    // 1. Get all entry dates, sort them, and use the earliest as the start
+    // Get all entry dates, sort them, and use the earliest as the start
     const entryDates = Object.keys(habit.entries);
     const startDate = entryDates.length
       ? new Date(entryDates.sort()[0])
@@ -12,12 +12,12 @@ export function useHabitStats(habit: Habit): HabitStats {
     const today = new Date();
     const dates: string[] = [];
 
-    // 2. Build an array of ISO strings from startDate up through today
+    // Build an array of ISO strings from startDate up through today
     for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
       dates.push(d.toISOString().split("T")[0]);
     }
 
-    // 3. Calculate current streak (count backwards until first non-done)
+    // 1 - Calculate current streak (count backwards until first non-done)
     let currentStreak = 0;
     for (let i = dates.length - 1; i >= 0; i--) {
       if (habit.entries[dates[i]] === "done") {
@@ -27,7 +27,7 @@ export function useHabitStats(habit: Habit): HabitStats {
       }
     }
 
-    // 4. Calculate longest streak (simple max-window)
+    // 2 - Calculate longest streak (simple max-window)
     let longestStreak = 0;
     let tempStreak = 0;
     for (const date of dates) {
@@ -39,7 +39,7 @@ export function useHabitStats(habit: Habit): HabitStats {
       }
     }
 
-    // 5. Completion % toward the 90-day goal
+    // 3 - Completion % toward the 90-day goal
     const completedDays = entryDates.filter(
       (d) => habit.entries[d] === "done"
     ).length;
@@ -48,6 +48,34 @@ export function useHabitStats(habit: Habit): HabitStats {
       100
     );
 
-    return { currentStreak, longestStreak, completionPercentage };
+    // 4 - monthlyScore: count of “done” entries where date is in current month
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const monthlyScore = entryDates.filter((d) => {
+      const dt = new Date(d);
+      return (
+        dt.getFullYear() === year &&
+        dt.getMonth() === month &&
+        habit.entries[d] === "done"
+      );
+    }).length;
+
+    // 5) consistencyRating: percentage of days done since startDate
+    const totalDaysSinceStart = dates.length;
+    const doneSinceStart = entryDates.filter(
+      (d) => habit.entries[d] === "done"
+    ).length;
+    const consistencyRating =
+      totalDaysSinceStart > 0
+        ? Math.round((doneSinceStart / totalDaysSinceStart) * 100)
+        : 0;
+
+    return {
+      currentStreak,
+      longestStreak,
+      completionPercentage,
+      monthlyScore,
+      consistencyRating,
+    };
   }, [habit]);
 }

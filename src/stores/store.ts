@@ -14,6 +14,13 @@ interface HabitStore {
   deleteHabit: (habitId: string) => void;
 }
 
+// Utility function to sort entries by date
+function sortEntries(entries: Record<string, HabitStatus>) {
+  return Object.fromEntries(
+    Object.entries(entries).sort(([a], [b]) => a.localeCompare(b))
+  );
+}
+
 export const useHabitStore = create<HabitStore>()(
   persist(
     (set) => ({
@@ -37,11 +44,14 @@ export const useHabitStore = create<HabitStore>()(
         status: HabitStatus
       ) => {
         set((state) => ({
-          habits: state.habits.map((habit) =>
-            habit.id === habitId
-              ? { ...habit, entries: { ...habit.entries, [date]: status } }
-              : habit
-          ),
+          habits: state.habits.map((habit) => {
+            if (habit.id !== habitId) return habit;
+            const merged = { ...habit.entries, [date]: status };
+            // This sorting is to ensure that the entries are always sorted by date
+            const sorted = sortEntries(merged);
+
+            return { ...habit, entries: sorted };
+          }),
         }));
       },
       toggleLockPastEntries: (habitId: string) => {

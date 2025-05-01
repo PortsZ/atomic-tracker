@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Habit, HabitStatus } from "@/types/habit";
-import { useHabitStore } from "@/lib/store";
+import { useHabitStore } from "@/stores/store";
 import {
   getCalendarDays,
   formatDateKey,

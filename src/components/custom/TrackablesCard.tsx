@@ -12,7 +12,7 @@ const TrackablesCard = ({
   return (
     <div
       className={cn(
-        "bg-muted p-3 rounded-md border border-primary/80",
+        "bg-muted p-3 rounded-md border border-primary/80 flex flex-col gap-2 justify-between",
         className
       )}
     >

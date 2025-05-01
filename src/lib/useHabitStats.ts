@@ -61,7 +61,7 @@ export function useHabitStats(habit: Habit): HabitStats {
     }).length;
 
     // 5) consistencyRating: percentage of days done since startDate
-    const totalDaysSinceStart = dates.length;
+    const totalDaysSinceStart = entryDates.length;
     const doneSinceStart = entryDates.filter(
       (d) => habit.entries[d] === "done"
     ).length;

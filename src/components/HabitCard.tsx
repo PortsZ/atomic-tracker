@@ -110,7 +110,7 @@ export function HabitCard({ habit }: HabitCardProps) {
                 <p className="text-sm font-medium">Progress to 90-day goal</p>
                 <p className="text-sm font-medium">{completionPercentage}%</p>
               </div>
-              <Progress value={completionPercentage} className="h-2" />
+              <Progress value={completionPercentage} className="h-4" />
             </div>
 
             <p className="text-sm italic mt-4 text-muted-foreground">
@@ -126,7 +126,17 @@ export function HabitCard({ habit }: HabitCardProps) {
             <DialogTitle>Unlock Past Dates</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <p>To edit past entries, please type &quot;I understand&quot;:</p>
+            <p>
+              Editing past entries is not recommended. True progress comes from
+              honest reflection—changing history undermines your accountability,
+              distorts your streaks, and weakens the habit-building process.
+              Stay honest, track today only, or make changes only{" "}
+              <span className="font-bold">if you really need to</span>.
+            </p>
+            <p>
+              To edit past entries, please type{" "}
+              <span className="font-bold">&quot;I understand&quot;</span>:
+            </p>
             <input
               type="text"
               value={unlockInput}

@@ -10,6 +10,8 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { AddHabitForm } from "@/components/AddHabitForm";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { OnboardingDialog } from "@/components/OnboardingDialog";
+import MotivationalMessage from "@/components/MotivationalMessage";
 
 export default function Home() {
   const habits = useHabitStore((state) => state.habits);
@@ -21,6 +23,8 @@ export default function Home() {
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] min-h-screen py-3 pb-20 gap-4 px-6 font-[family-name:var(--font-geist-sans)]">
+      <OnboardingDialog />
+
       <header className="text-center flex justify-between items-start">
         <h1 className="text-3xl font-bold ">🚀 Atomic Habit Tracker 🚀</h1>
         <Dialog>

@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -16,21 +14,56 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# atomic-tracker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Overview
 
-## Learn More
+A simple habit tracker inspired by "Atomic Habits" by James Clear, designed to encourage daily habit-building.
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Interactive calendar with easy toggling between done, missed, and pending states.
+- Visual progress tracking toward a 90-day habit formation goal.
+- Inspirational quotes from Atomic Habits, updated dynamically as users progress.
+- Past date edit locking with explicit user consent for unlocking.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture & Design Choices
 
-## Deploy on Vercel
+- Atomic components: easy to maintain and extend.
+- Hooks for state logic: maintainable, testable, and modular.
+- JSON in-memory storage for quick MVP and simplicity.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Database storage
+- User authentication
+- Time and task tracking
+- Advanced analytics and habit insights
+- Advanced habit research to improve actionable insights. (e.g. change 90 days to whatever is best for the habit the user is trying to create)
+
+### Future research for improvements
+
+    The study also showed that the time it took to form a habit ranged from 18 to 254 days, highlighting the variability.
+    Factors influencing habit formation:
+    Several factors can influence how long it takes to build a new habit, including:
+    The nature of the habit: Simple habits, like drinking more water, may form faster than complex habits, like exercising regularly.
+    Personal motivation: Individuals who are highly motivated to change a habit may find it easier to form.
+    The environment: A supportive environment can make it easier to develop and maintain a new habit.
+    Consistency is key:
+    Regardless of the specific timeframe, consistency and repeated action are essential for habit formation.
+
+## Technical Stack
+
+- Next.js
+- Tailwind CSS
+- Zustand for state management
+- Shadcn for great components we could change later and beautiful ui fast.
+- React state/hooks (no database, using JSON in-memory storage)
+
+## Setup Instructions
+
+```bash
+git clone [repo_url]
+npm install
+npm run dev
+```

@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
   DialogFooter,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
@@ -174,9 +173,7 @@ export const OnboardingDialog = () => {
             {currentStepData.title}
           </DialogTitle>
         </DialogHeader>
-        <DialogDescription className="py-4">
-          {currentStepData.description}
-        </DialogDescription>
+        <div className="py-4">{currentStepData.description}</div>
         <div className="flex justify-center my-2">
           <div className="flex gap-1">
             {onboardingSteps.map((_, index) => (

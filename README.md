@@ -40,6 +40,8 @@ A simple habit tracker inspired by "Atomic Habits" by James Clear, designed to e
 - Time and task tracking
 - Advanced analytics and habit insights
 - Advanced habit research to improve actionable insights. (e.g. change 90 days to whatever is best for the habit the user is trying to create)
+- grab the habits from the (future) tasks and suggest to track, or get tracking from the user task management,
+- add whats app integration for convenient logging
 
 ### Future research for improvements
 

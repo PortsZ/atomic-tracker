@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { useHabitStore } from "@/lib/store";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { DialogHeader } from "./ui/dialog";
 
 export function AddHabitForm() {
   const [habitName, setHabitName] = useState("");
@@ -18,10 +20,10 @@ export function AddHabitForm() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Add New Habit</CardTitle>
-      </CardHeader>
+    <>
+      <DialogHeader>
+        <DialogTitle>Add New Habit</DialogTitle>
+      </DialogHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <input
@@ -36,6 +38,6 @@ export function AddHabitForm() {
           </Button>
         </form>
       </CardContent>
-    </Card>
+    </>
   );
 }

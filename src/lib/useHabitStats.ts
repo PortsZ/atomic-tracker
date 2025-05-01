@@ -3,41 +3,35 @@ import { Habit, HabitStats } from "@/types/habit";
 
 export function useHabitStats(habit: Habit): HabitStats {
   return useMemo(() => {
-    // Create an array of dates starting from the habit creation date to today
-    const creationDate = new Date(habit.createdAt);
-    const today = new Date();
-    const dates = [];
+    // 1. Get all entry dates, sort them, and use the earliest as the start
+    const entryDates = Object.keys(habit.entries);
+    const startDate = entryDates.length
+      ? new Date(entryDates.sort()[0])
+      : new Date(); // fallback to today if no entries
 
-    // Generate all dates from creation to today
-    for (
-      let d = new Date(creationDate);
-      d <= today;
-      d.setDate(d.getDate() + 1)
-    ) {
-      dates.push(new Date(d).toISOString().split("T")[0]);
+    const today = new Date();
+    const dates: string[] = [];
+
+    // 2. Build an array of ISO strings from startDate up through today
+    for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
+      dates.push(d.toISOString().split("T")[0]);
     }
 
-    // Calculate current streak
+    // 3. Calculate current streak (count backwards until first non-done)
     let currentStreak = 0;
     for (let i = dates.length - 1; i >= 0; i--) {
-      const date = dates[i];
-      const status = habit.entries[date];
-
-      if (status === "done") {
+      if (habit.entries[dates[i]] === "done") {
         currentStreak++;
       } else {
         break;
       }
     }
 
-    // Calculate longest streak
+    // 4. Calculate longest streak (simple max-window)
     let longestStreak = 0;
     let tempStreak = 0;
-
     for (const date of dates) {
-      const status = habit.entries[date];
-
-      if (status === "done") {
+      if (habit.entries[date] === "done") {
         tempStreak++;
         longestStreak = Math.max(longestStreak, tempStreak);
       } else {
@@ -45,19 +39,15 @@ export function useHabitStats(habit: Habit): HabitStats {
       }
     }
 
-    // Calculate completion percentage (towards 90-day goal)
-    const completedDays = Object.values(habit.entries).filter(
-      (status) => status === "done"
+    // 5. Completion % toward the 90-day goal
+    const completedDays = entryDates.filter(
+      (d) => habit.entries[d] === "done"
     ).length;
     const completionPercentage = Math.min(
       Math.round((completedDays / 90) * 100),
       100
     );
 
-    return {
-      currentStreak,
-      longestStreak,
-      completionPercentage,
-    };
+    return { currentStreak, longestStreak, completionPercentage };
   }, [habit]);
 }

@@ -77,12 +77,12 @@ export function HabitCalendar({ habit }: HabitCalendarProps) {
   return (
     <div className="space-y-4 w-full">
       <div className="w-full mx-auto h-[80vh]">
-        <div className="border rounded-lg shadow-md h-full flex flex-col">
+        <div className="border border-primary/80 rounded-lg shadow-md h-full flex flex-col">
           {/* Calendar Header */}
-          <div className="flex justify-between items-center p-4 border-b">
+          <div className="flex justify-between items-center p-4 border-b border-primary/60">
             <button
               onClick={handlePrevMonth}
-              className="p-2 rounded-full hover:bg-gray-200"
+              className="p-2 rounded-full hover:bg-primary/10 select-none"
             >
               &lt;
             </button>
@@ -91,18 +91,18 @@ export function HabitCalendar({ habit }: HabitCalendarProps) {
             </h2>
             <button
               onClick={handleNextMonth}
-              className="p-2 rounded-full hover:bg-gray-200"
+              className="p-2 rounded-full hover:bg-primary/10 select-none"
             >
               &gt;
             </button>
           </div>
 
           {/* Weekday Headers */}
-          <div className="grid grid-cols-7 gap-1 p-2 border-b">
+          <div className="grid grid-cols-7 gap-1 p-2 border-b border-primary/60">
             {weekdays.map((day) => (
               <div
                 key={day}
-                className="text-center font-bold text-gray-500 py-2"
+                className="text-center font-bold text-primary/50 py-2"
               >
                 {day}
               </div>
@@ -129,7 +129,7 @@ export function HabitCalendar({ habit }: HabitCalendarProps) {
                   key={index}
                   className={`
                     flex justify-center items-center 
-                    ${!isCurrentMonthDay ? "opacity-50" : ""}
+                    ${!isCurrentMonthDay ? "opacity-40" : ""}
                     relative
                   `}
                 >
@@ -148,7 +148,7 @@ export function HabitCalendar({ habit }: HabitCalendarProps) {
                       ${
                         isTodayDay
                           ? "border-2 border-blue-500"
-                          : " border-gray-500 border-2"
+                          : " border-primary/65 border-2"
                       }
                       w-full h-full select-none
                       ${isLocked ? "cursor-not-allowed opacity-60" : ""}
@@ -158,7 +158,7 @@ export function HabitCalendar({ habit }: HabitCalendarProps) {
                   </div>
                   {isLocked && (
                     <div
-                      className="absolute top-1 right-2 text-xs z-20"
+                      className="absolute top-1 right-2 text-sm  z-20"
                       style={{ opacity: 1 }}
                     >
                       🔒

@@ -11,7 +11,7 @@ interface HabitContainerProps {
 
 export function HabitContainer({ habit }: HabitContainerProps) {
   return (
-    <div className="flex gap-4 py-4 w-full  mx-auto">
+    <div className="flex gap-4 py-2 w-full  mx-auto">
       <div className="w-2/5">
         <HabitCard habit={habit} />
       </div>

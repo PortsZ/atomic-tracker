@@ -14,6 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import TrackablesCard from "./custom/TrackablesCard";
 
 interface HabitCardProps {
   habit: Habit;
@@ -47,11 +48,16 @@ export function HabitCard({ habit }: HabitCardProps) {
 
   return (
     <>
-      <Card className="w-full mx-auto">
+      <Card className="w-full mx-auto border-primary/80">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>{habit.name}</CardTitle>
           <div>
-            <Button variant="outline" size="sm" onClick={handleLockToggle}>
+            <Button
+              variant="outline"
+              className="border-primary/60"
+              size="sm"
+              onClick={handleLockToggle}
+            >
               {habit.lockPastEntries ? "🔓 Unlock" : "🔒 Lock"} Past Dates
             </Button>
           </div>
@@ -59,14 +65,18 @@ export function HabitCard({ habit }: HabitCardProps) {
         <CardContent>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-muted p-3 rounded-md">
+              <TrackablesCard className="bg-muted p-3 rounded-md">
                 <p className="text-sm text-muted-foreground">Current Streak</p>
-                <p className="text-2xl font-bold">{currentStreak} days</p>
-              </div>
-              <div className="bg-muted p-3 rounded-md">
+                <p className="text-2xl font-bold">
+                  {currentStreak} {currentStreak === 1 ? "day" : "days"}
+                </p>
+              </TrackablesCard>
+              <TrackablesCard className="bg-muted p-3 rounded-md">
                 <p className="text-sm text-muted-foreground">Longest Streak</p>
-                <p className="text-2xl font-bold">{longestStreak} days</p>
-              </div>
+                <p className="text-2xl font-bold">
+                  {longestStreak} {longestStreak === 1 ? "day" : "days"}
+                </p>
+              </TrackablesCard>
             </div>
 
             <div className="space-y-2">

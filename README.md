@@ -69,3 +69,10 @@ git clone [repo_url]
 npm install
 npm run dev
 ```
+
+## Useful Links:
+
+- Excalidraw: https://link.excalidraw.com/l/9xENFG3oEy/vzn0rZCBMt
+- Thought process in GPT:
+- Video:
+- This code:

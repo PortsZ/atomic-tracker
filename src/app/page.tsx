@@ -9,6 +9,8 @@ import { PlusIcon } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { AddHabitForm } from "@/components/AddHabitForm";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 export default function Home() {
   const habits = useHabitStore((state) => state.habits);
   const [selectedHabitId, setSelectedHabitId] = useState<string | null>(
@@ -18,17 +20,17 @@ export default function Home() {
   const selectedHabit = habits.find((habit) => habit.id === selectedHabitId);
 
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen p-8 pb-20 gap-6 sm:p-16 font-[family-name:var(--font-geist-sans)]">
-      <header className="text-center">
-        <h1 className="text-3xl font-bold mb-2">🚀 Atomic Habit Tracker 🚀</h1>
+    <div className="grid grid-rows-[auto_1fr_auto] min-h-screen py-3 pb-20 gap-4 px-6 font-[family-name:var(--font-geist-sans)]">
+      <header className="text-center flex justify-between items-start">
+        <h1 className="text-3xl font-bold ">🚀 Atomic Habit Tracker 🚀</h1>
         <Dialog>
           <p className="text-muted-foreground flex items-center justify-center gap-2">
             Track your habits and build consistency{" "}
             <span>
               <DialogTrigger>
-                <div className="flex items-center gap-2 border rounded-md p-2 border-gray-300 hover:bg-gray-100 transition-colors">
-                  <PlusIcon className="w-4 h-4 mr-2" />
-                  add a new habit
+                <div className="flex items-center gap-2 border rounded-md p-2 border-primary text-primary hover:bg-accent/50 transition-colors pr-4">
+                  <PlusIcon className="w-4 h-4" />
+                  Create a new habit
                 </div>
               </DialogTrigger>
             </span>
@@ -37,18 +39,21 @@ export default function Home() {
             <AddHabitForm />
           </DialogContent>
         </Dialog>
+        <div className="flex justify-end mb-2">
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="grid gap-4">
         {habits.length > 0 ? (
-          <div className="border rounded-md shadow-sm overflow-hidden">
+          <div className="border rounded-md shadow-sm overflow-hidden border-primary/80">
             <HabitTabs
               habits={habits}
               selectedHabitId={selectedHabitId}
               onSelectHabit={setSelectedHabitId}
             />
 
-            <div className="p-4">
+            <div className="px-4 py-2">
               {selectedHabit ? (
                 <HabitContainer habit={selectedHabit} />
               ) : (
@@ -68,9 +73,9 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="text-center text-sm text-muted-foreground">
+      {/* <footer className="text-center text-sm text-muted-foreground">
         <p className="italic">Soli deo gloria ✝️</p>
-      </footer>
+      </footer> */}
     </div>
   );
 }

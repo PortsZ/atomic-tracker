@@ -53,7 +53,7 @@ export function HabitTabs({
 
   return (
     <>
-      <div className="flex overflow-x-auto gap-1 pb-0 border-b relative">
+      <div className="flex overflow-x-auto gap-1 pb-0 border-b border-primary/80 relative">
         {habits.map((habit) => (
           <div
             key={habit.id}
@@ -63,7 +63,7 @@ export function HabitTabs({
               transition-all duration-200 relative
               ${
                 selectedHabitId === habit.id
-                  ? "bg-background text-foreground border-x border-t border-muted-foreground/20 font-medium"
+                  ? "bg-background text-foreground border-x border-t border-primary/40 font-medium"
                   : "bg-muted text-muted-foreground hover:bg-muted/70"
               }
             `}

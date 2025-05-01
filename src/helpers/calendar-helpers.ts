@@ -87,9 +87,9 @@ export const getStatusClass = (date: Date, habit: Habit): string => {
   const status = habit.entries[dateStr];
 
   if (status === "done") {
-    return "bg-emerald-500 text-white";
+    return "bg-done text-white";
   } else if (status === "missed") {
-    return "bg-red-500 text-white";
+    return "bg-missed text-white";
   }
 
   return "bg-transparent";
